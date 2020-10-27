@@ -1,0 +1,12 @@
+{
+  "name": "AcessCar",
+  "displayName": "AcessCar",
+  "expo": {
+    "name": "AcessCar",
+    "slug": "AcessCar",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
