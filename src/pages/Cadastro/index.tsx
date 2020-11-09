@@ -12,6 +12,12 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import 'react-native-gesture-handler';
 
+
+//import * as firebase from 'firebase-tools';
+//import 'firebase/firestore'
+//import {firebaseConfig} from '../../back/confgFireBase'
+
+
 const Cadastro = () =>  {
   const {navigate} = useNavigation ();
   function NextPageCadastrar (){

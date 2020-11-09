@@ -1,0 +1,77 @@
+{
+  "project_info": {
+    "project_number": "1002938423667",
+    "firebase_url": "https://acesscar-61061.firebaseio.com",
+    "project_id": "acesscar-61061",
+    "storage_bucket": "acesscar-61061.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1002938423667:android:546a1f9c08788a039b4d06",
+        "android_client_info": {
+          "package_name": "com.acesscar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1002938423667-ftjnboqe19p697otvtmchsgktkjeov8j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAM5s0kmngO1BKCTN3mAePmfInwmErcWhY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1002938423667-ftjnboqe19p697otvtmchsgktkjeov8j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1002938423667:android:3a9999458c6c29139b4d06",
+        "android_client_info": {
+          "package_name": "com.adressars.Acess"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1002938423667-fp116ar1h5umdsikjeomhpb2kp1vl27g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.adressars.Acess",
+            "certificate_hash": "cba407f2fa02b0acc14d965b8995a6d815646803"
+          }
+        },
+        {
+          "client_id": "1002938423667-ftjnboqe19p697otvtmchsgktkjeov8j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAM5s0kmngO1BKCTN3mAePmfInwmErcWhY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1002938423667-ftjnboqe19p697otvtmchsgktkjeov8j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
