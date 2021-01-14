@@ -61,3 +61,17 @@ export const Back = styled.TouchableOpacity`
     padding-left:  8px;
     border-radius: 4px;
 `;
+
+export const VoiceButton = styled.TouchableOpacity`
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: #19cdce;
+    width: 60px;
+    height: 60px;
+    justifyContent: center;
+    padding-left:  8px;
+    border-radius: 4px;
+`;
+
+

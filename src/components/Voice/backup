@@ -1,29 +1,93 @@
+<Text style={styles.stat}>{`Recognized: ${
+          this.state.recognized
+        }`}</Text>
+        <Text style={styles.stat}>{`Pitch: ${this.state.pitch}`}</Text>
+
+
+<Text style={styles.stat}>Results</Text>
+        {this.state.results.map((result, index) => {
+          return (
+            <Text key={`result-${index}`} style={styles.stat}>
+              {result}
+            </Text>
+          );
+        })}
+
+
+<Text style={styles.stat}>{`End: ${this.state.end}`}</Text>
+
+
+ <TouchableHighlight onPress={this._stopRecognizing}>
+          <Text style={styles.action}>Stop Recognizing</Text>
+        </TouchableHighlight>
+        <TouchableHighlight onPress={this._cancelRecognizing}>
+          <Text style={styles.action}>Cancel</Text>
+        </TouchableHighlight>
+        <TouchableHighlight onPress={this._destroyRecognizer}>
+          <Text style={styles.action}>Destroy</Text>
+        </TouchableHighlight>
+
+
+        then(() => {if(this.state.results[0]){this.setState({done: true})}});
+
+
+
+        
+    right: 10px;
+    background: #19cdce;
+    width: 60px;
+    height: 60px;
+    justifyContent: center;
+    padding-left:  8px;
+    border-radius: 4px;
+
+
+{/*onLocationSelected = {this.handlelocationSelected} search = {this.state.search}*/}
+    --------------------------------------------------------------------Places.tsx
+
+
+    import React, { Component, useEffect, useRef , createRef} from 'react';
 import {Platform} from 'react-native';
-import React, {Component} from 'react';
 import { TextInput } from 'react-native';
-import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+import { GooglePlacesAutocomplete, GooglePlacesAutocompleteRef } from 'react-native-google-places-autocomplete';
+import { View } from 'react-native';
+import '../../image.ts';
+import uberx from '../../img/uberx.png';
+import { Container, TypeTitle, TypeDescription, TypeImage, RequestButton, RequestButtonText } from './styles';
 
 interface IRecipeProps {
-    onLocationSelected?: any;
+    onLocationSelected?: any,
+    search: string,
   }
-  
-  interface IRecipeState {
-  }
+interface IRecipeState {
+   
+}
 
-export default class Search extends Component <IRecipeProps, IRecipeState>{
+export default class Places extends Component <IRecipeProps, IRecipeState>{
     state:any = {
         searchFocused: null,
+        search: '',
     }
 
     render(){
 
         const { searchFocused } = this.state; 
         const { onLocationSelected }  =  this.props;
-
-        return <GooglePlacesAutocomplete
+        const googleplaces = createRef<GooglePlacesAutocompleteRef>();
+        
+        useEffect(() => {
+            googleplaces.current?.setAddressText('Some Text');
+        }, []);
+        
+  return(
+        <Container>
+        <TypeTitle>Resultados da Pesquisa</TypeTitle>
+        <GooglePlacesAutocomplete
+        ref = {googleplaces}
         placeholder = "Para onde?"
         minLength={2}
-        onPress = {onLocationSelected}
+        onPress = {(data, details = null) => {
+            console.log(data, details);}}
         query={{
             key: 'AIzaSyBMafnS7Tw3QxAkaBQO0-V9DsueL3SjsxY',
             language: 'pt'
@@ -91,6 +155,7 @@ export default class Search extends Component <IRecipeProps, IRecipeState>{
                 height: 58  
             }
         }}
-          />;
+          />
+        </Container>)
     }
 }

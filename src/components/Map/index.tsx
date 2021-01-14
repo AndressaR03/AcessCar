@@ -1,5 +1,5 @@
 import React, {Component, createRef, Fragment} from 'react';
-import {View, Image} from 'react-native';
+import {View, Image, Modal, Text} from 'react-native';
 import MapView from 'react-native-maps';
 import { Marker } from 'react-native-maps';
 import * as Permissions from 'expo-permissions';
@@ -12,7 +12,10 @@ import {Platform } from 'react-native';
 import Search from '../Search';
 import markerImage from "../../img/marker.png";
 import Directions from "../Directions";
-import Details from "../Details"
+import Details from "../Details";
+import VoiceComand from "../Voice";
+import { useNavigation } from '@react-navigation/native';
+
 
 import { 
     Back,
@@ -20,11 +23,11 @@ import {
     LocationText,
     LocationTimeText,
     LocationTimeTextSmall,
-    LocationTimeBox
+    LocationTimeBox,
+    VoiceButton
   } from './styles';
 
 export default class Map extends Component{
-
     state:any = {
         mapRegion: null,
         destination: null,
@@ -33,13 +36,14 @@ export default class Map extends Component{
         duration: null,
         locationResult: null,
         distance: null,
+        last_tap: null,
+        isVisible: false,
       };
       async componentDidMount() {
         this._getLocationAsync();
-    
-    
+
       }
-    
+ 
       _handleMapRegionChange = (mapRegion:any) => {
         console.log(mapRegion);
         this.setState({ mapRegion });
@@ -97,7 +101,13 @@ export default class Map extends Component{
         })
     
       }
-    
+
+      handleVoice =() => {
+        const {navigate} = useNavigation ();
+        navigate('Voice')
+        console.log('Here')
+      }
+
       mapStyle = [
         {
           "elementType": "geometry",
@@ -261,12 +271,13 @@ export default class Map extends Component{
       ]
 
     render(){
-
+      
         const mapView = createRef<MapView>();
         const { mapRegion, destination, duration, location, distance} = this.state;
         
         return(
             <>
+            
             <View style={{flex: 1}}>
                 <MapView
                     style={{flex: 1 }}
@@ -330,8 +341,23 @@ export default class Map extends Component{
               duration = {duration} />
             </Fragment>
           ) : (
-            <Search onLocationSelected = {this.handlelocationSelected} /> 
-          )} 
+            <>
+            <Search onLocationSelected = {this.handlelocationSelected} />
+            <VoiceButton onPress = {() => this.setState({ isVisible: true })}>
+              <Image style={{width: 50, height: 50}} source={require('../../img/voice.png')} />
+            </VoiceButton>
+            </>
+            )} 
+            <Modal
+            animationType={'slide'} 
+            transparent={false}
+            visible={this.state.isVisible}
+            onRequestClose={() => {
+            this.setState({ isVisible: false });
+            }}
+            >
+            <VoiceComand></VoiceComand>
+            </Modal>
             </View>
             </>
         );

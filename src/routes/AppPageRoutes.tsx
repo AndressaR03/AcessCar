@@ -15,14 +15,19 @@ const {Navigator, Screen} = createStackNavigator ();
 function AppPageRoutes () {
     return(
     <Navigator screenOptions= {{headerShown: false}}>
+                   
+          <Screen 
+          name="Localizacao" 
+          component={Localizacao}
+        /> 
+        <Screen
+          name="Voice" 
+          component={VoiceComand} 
+          />
          <Screen 
           name="Login"
           component={Login}
-        />
-         <Screen
-          name="Voice" 
-          component={VoiceComand} 
-        />         
+        />        
         <Screen 
           name="Menu"
           component={Menu}
@@ -36,10 +41,7 @@ function AppPageRoutes () {
          name="Entrar" 
          component={Entrar}
          /> 
-        <Screen 
-          name="Localizacao" 
-          component={Localizacao}
-        /> 
+        
     </Navigator>
     );
 }

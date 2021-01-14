@@ -7831,10 +7831,10 @@ react-native-gesture-handler@~1.7.0:
     invariant "^2.2.4"
     prop-types "^15.7.2"
 
-react-native-google-places-autocomplete@^2.0.3:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/react-native-google-places-autocomplete/-/react-native-google-places-autocomplete-2.0.3.tgz#2573d97b2fe0d2dac069ef70aaee153917c1f9d1"
-  integrity sha512-4uGqt8wKefUi9U2UOUQdOvKvtMKitChjqULwmze6YBfkzt8fO/akmayEw5TUWwensz1UphHwonUoSbLaIYclDQ==
+react-native-google-places-autocomplete@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/react-native-google-places-autocomplete/-/react-native-google-places-autocomplete-2.1.2.tgz#1cf1462216d2bddfaa01a6db11077b8eac8d123b"
+  integrity sha512-daCLjXu2n5iIwfBWrfexF+ssCjhCnAboZvv+SKnsB+86zKlEq7TD4ERLq+XoNtt/JW5jaoBSk0SxATNKTrMqAA==
   dependencies:
     lodash.debounce "^4.0.8"
     prop-types "^15.7.2"
