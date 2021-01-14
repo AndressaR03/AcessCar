@@ -2,12 +2,13 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import Login from '../pages/Home';
+import Login from '../pages/Home/home';
 import Entrar from '../pages/Entrar';
 import Localizacao from '../pages/Mapa';
 import VoiceComand from '../pages/Voice';
 import Menu from '../pages/Menu';
 import Cadastro from '../pages/Cadastro';
+
 
 const {Navigator, Screen} = createStackNavigator ();
 
