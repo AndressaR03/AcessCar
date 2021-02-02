@@ -10,9 +10,11 @@ import {
 } from 'react-native';
 import 'react-native-gesture-handler';
 import {db} from '../../back/firebase';
+import { useNavigation } from '@react-navigation/native';
 
   const Cadastro = () =>  {
-
+    const { navigate } = useNavigation();
+    navigate('Cadastro');
     const [state, setState] = useState({
       nome: "",
       email: "",
@@ -43,32 +45,22 @@ import {db} from '../../back/firebase';
   return (
     <ScrollView style={styles.scrollView}>
     <KeyboardAvoidingView style={styles.container}>
-    <View style={{height:30, width:380,backgroundColor:'#19cdce'}}>
-
-</View>
       <View>
         <Text style={styles.cadastro}>CADASTRO</Text>
-        <Text style={styles.intro}>Cadastre-se e inicie sua jornada!</Text>
-        <Text style={styles.intro2}>Onde você quer ir hoje?</Text>
-      </View >
-     
-      <View style={styles.container} >
-
-        <TextInput style={styles.nome} placeholder='Nome' onChangeText={(value) => handleChangeText("nome", value)}/>
-        <TextInput keyboardType={'numeric'} style={styles.cpf} placeholder='CPF' onChangeText={(value) => handleChangeText("cpf", value)}/>
-        <TextInput keyboardType={'phone-pad'} style={styles.telefone} placeholder='Telefone'onChangeText={(value) => handleChangeText("telefone", value)}/>
-        <TextInput keyboardType={'email-address'} style={styles.email} placeholder='E-mail' onChangeText={(value) => handleChangeText("email", value)}/>
-        <TextInput style={styles.senha} placeholder='Senha min. (6 digitos)' secureTextEntry={true} onChangeText={(value) => handleChangeText("senha", value)}/>
-
+        <Text style={styles.intro}>Informe seus dados para cadastro!</Text>
+      </View >     
+      <View style={styles.campos} >
+        <TextInput placeholderTextColor="white" style={styles.nome} placeholder='Nome' onChangeText={(value) => handleChangeText("nome", value)}/>
+        <TextInput placeholderTextColor="white" keyboardType={'numeric'} style={styles.cpf} placeholder='CPF' onChangeText={(value) => handleChangeText("cpf", value)}/>
+        <TextInput placeholderTextColor="white" keyboardType={'phone-pad'} style={styles.telefone} placeholder='Telefone'onChangeText={(value) => handleChangeText("telefone", value)}/>
+        <TextInput placeholderTextColor="white" keyboardType={'email-address'} style={styles.email} placeholder='E-mail' onChangeText={(value) => handleChangeText("email", value)}/>
         <TouchableOpacity style={styles.button} onPress={() => AddNewUser()}> 
-          <Text style={{fontSize:20, color:'#1c1c1c', alignItems: "center"}}>Cadastrar</Text>
+          <Text style={{fontSize:20, color:'#1c1c1c', alignItems: "center"}} onPress={() => navigate("Senha")}>Próximo</Text>
         </TouchableOpacity>
-      </View>
-      
+      </View>      
 
     </KeyboardAvoidingView>
     </ScrollView>
      );
 }
-
 export default Cadastro;

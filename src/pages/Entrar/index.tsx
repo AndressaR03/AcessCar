@@ -49,9 +49,6 @@ const Entrar = () => {
   return(
     <ScrollView style={styles.scrollView}>
     <KeyboardAvoidingView style={styles.container}>
-    <View style={{height:30, width:380,backgroundColor:'#19cdce'}}>
-
-</View>
       <View style={styles.container}>
       <Image 
          style= {{width:450, height:200, marginTop: 50,}}
@@ -60,9 +57,9 @@ const Entrar = () => {
       </View >
       <View style={styles.container}>
         {/*<TextInput underlineColorAndroid='transparent' placeholder='Nome' placeholderTextColor='#abb2b9' style={styles.nome2} />*/}
-        <TextInput style={styles.nome} placeholder='Digite seu email'
+        <TextInput placeholderTextColor="white" style={styles.nome} placeholder='Digite seu email'
          onChangeText={email => state.email = email}/>
-        <TextInput style={styles.senha} placeholder='Digite sua senha' secureTextEntry={true}
+        <TextInput placeholderTextColor="white" style={styles.senha} placeholder='Digite sua senha' secureTextEntry={true}
          onChangeText={senha => state.password = senha}/>
         <TouchableOpacity style={styles.button} onPress = {login}>
           <Text style={{fontSize:20, color:'#1c1c1c', alignItems: "center"}}>Entrar</Text>
