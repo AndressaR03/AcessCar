@@ -54,7 +54,7 @@ export const Back = styled.TouchableOpacity`
         android: 40,
     })};
     left: 20px;
-    background: #4F4F4F;
+    background: #19cdce
     width: 40px;
     height: 30px;
     justifyContent: center;
@@ -75,3 +75,10 @@ export const VoiceButton = styled.TouchableOpacity`
 `;
 
 
+export const ModalDetails = styled.Modal`
+    height: 100px;
+    width: 100%;
+    opacity: 1;
+    bottom: 0;
+    padding: 20px;
+`

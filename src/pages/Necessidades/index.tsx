@@ -46,6 +46,7 @@ const Necessidades = () => {
     return (
         <ScrollView style={styles.scrollView}>
             <KeyboardAvoidingView style={styles.container}>
+                <View style={{flex: 8}}>
                 <View>
                     <Text style={styles.cadastro}>Necessidades</Text>
                     <Text style={styles.intro2}>Conte-nos um pouco mais sobre você!</Text>
@@ -101,7 +102,8 @@ const Necessidades = () => {
                         backgroundColor={'#333333'}
                     />
                 </View>
-                <View style={{flex: 1, flexDirection: 'row'}}>
+                </View>
+                <View style={{flex: 2, flexDirection: 'row'}}>
                     <TouchableOpacity style={styles.button} onPress={() => navigate("Senha")}>
                         <Text style={{ fontSize: 20, color: '#1c1c1c', alignItems: "center" }}>Voltar</Text>
                     </TouchableOpacity>  

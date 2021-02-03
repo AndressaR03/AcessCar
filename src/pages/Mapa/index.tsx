@@ -1,7 +1,14 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import Map from '../../components/Map'
+import {VoiceProvider} from "../../context/Voice"
 
-
-const Mapa = () => <Map/>
+function Mapa(){
+  
+    return(
+        <VoiceProvider>
+            <Map/>
+        </VoiceProvider>
+    );
+ }
 
 export default Mapa;

@@ -18,17 +18,14 @@ function Menu(){
     const {navigate} = useNavigation();
 
     const state = {
-        entries: [{
-            title: "Voice",
-            page: "Voice",
-        },
+        entries: [
         {
             title: "Mapa",
             page:"Localizacao"
         },
         {
-            title: "Login",
-            page: "Login"
+            title: "Pagamento",
+            page: "Pagamento"
         }]
     }
 

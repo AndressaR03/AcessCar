@@ -1,4 +1,4 @@
-import React, { useState, Component } from 'react';
+import React, { useState,useContext, useEffect} from 'react';
 import {
   StyleSheet,
   Text,
@@ -8,6 +8,8 @@ import {
   TouchableHighlight,
 } from 'react-native';
 
+import {VoiceContext} from "../../context/Voice"
+
 import Voice, {
   SpeechRecognizedEvent,
   SpeechResultsEvent,
@@ -15,132 +17,94 @@ import Voice, {
 } from '@react-native-community/voice';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { ThemeConsumer } from 'styled-components';
-import Places from "../Places";
+import Search from '../Search';
 
 
 type Props = {};
-type State = {
-  recognized: string;
-  pitch: string;
-  error: string;
-  end: string;
-  started: string;
-  results: string[];
-  partialResults: string[];
-  done: boolean;
-  isVisible: boolean,
-  search: string,
-  destination: { latitude: any; longitude: any; title: any; }
-};
 
 
 
-class VoiceComand extends Component<Props, State> {
-  state = {
-    recognized: '',
-    pitch: '',
-    error: '',
-    end: '',
-    started: '',
-    results: [] ,
-    partialResults: [],
-    done: false,
-    isVisible: false,
-    search: '',
-    destination: { latitude: null, longitude: null, title: null, },
-    
+export default function VoiceComand (props:Props) {
+
+  const [recognized, setRecognized] = useState('');
+  const [pitch, setPitch] = useState('');
+  const [error, setError] = useState('');
+  const [end, setEnd] = useState('');
+  const [started, setStarted] = useState('');
+  const [results, setResults] = useState<string[]|[]>([]);
+  const [busca, setBusca] = useState('');
+  const [partialResults, setPartialResults] = useState<any>([]);
+  const useVoice = useContext(VoiceContext);
+
+
+ Voice.onSpeechStart = onSpeechStart;
+ Voice.onSpeechRecognized = onSpeechRecognized;
+ Voice.onSpeechEnd = onSpeechEnd;
+ Voice.onSpeechError = onSpeechError;
+ Voice.onSpeechResults = onSpeechResults;
+ Voice.onSpeechPartialResults = onSpeechPartialResults;
+ Voice.onSpeechVolumeChanged = onSpeechVolumeChanged;
+
+
+ useEffect(() => {
+  Voice.destroy().then(Voice.removeAllListeners);
+  }, []);
+  
+
+  function onSpeechStart (e: any){
+    //console.log('onSpeechStart: ', e);
+    setStarted('√');
   };
 
-  constructor(props: Props) {
-    super(props);
-    Voice.onSpeechStart = this.onSpeechStart;
-    Voice.onSpeechRecognized = this.onSpeechRecognized;
-    Voice.onSpeechEnd = this.onSpeechEnd;
-    Voice.onSpeechError = this.onSpeechError;
-    Voice.onSpeechResults = this.onSpeechResults;
-    Voice.onSpeechPartialResults = this.onSpeechPartialResults;
-    Voice.onSpeechVolumeChanged = this.onSpeechVolumeChanged;
-    
+  function onSpeechRecognized (e: SpeechRecognizedEvent){
+   //console.log('onSpeechRecognized: ', e);
+   setRecognized('√');
+   setStarted('');
+  };
+
+  function onSpeechEnd (e: any){
+   // console.log('onSpeechEnd: ', e);
+    setEnd('√');
+  };
+
+  function onSpeechError(e: SpeechErrorEvent){
+   // console.log('onSpeechError: ', e);
+    setError(JSON.stringify(e.error));
+  };
+
+  function onSpeechResults(e: SpeechResultsEvent){
+   // console.log('onSpeechResults: ', e);
+    setResults(e.value!)
   }
 
-  componentWillUnmount() {
-    Voice.destroy().then(Voice.removeAllListeners);
-  }
-
-  onSpeechStart = (e: any) => {
-    console.log('onSpeechStart: ', e);
-    this.setState({
-      started: '√',
-    });
+  function onSpeechPartialResults(e: SpeechResultsEvent){
+    //console.log('onSpeechPartialResults: ', e);
+    setPartialResults(e.value!);
   };
 
-  onSpeechRecognized = (e: SpeechRecognizedEvent) => {
-    console.log('onSpeechRecognized: ', e);
-    this.setState({
-      recognized: '√',
-      started: '',
-    });
+  function onSpeechVolumeChanged(e: any){
+    //console.log('onSpeechVolumeChanged: ', e);
+    setPitch(e.value)
   };
 
-  onSpeechEnd = (e: any) => {
-    console.log('onSpeechEnd: ', e);
-    this.setState({
-      end: '√',
-    });
-  };
-
-  onSpeechError = (e: SpeechErrorEvent) => {
-    console.log('onSpeechError: ', e);
-    this.setState({
-      error: JSON.stringify(e.error),
-    });
-  };
-
-  onSpeechResults = (e: SpeechResultsEvent) => {
-    console.log('onSpeechResults: ', e);
-    this.setState({
-      results: e.value!,
-    });
-  };
-
-  onSpeechPartialResults = (e: SpeechResultsEvent) => {
-    console.log('onSpeechPartialResults: ', e);
-    this.setState({
-      partialResults: e.value!,
-    });
-  };
-
-  onSpeechVolumeChanged = (e: any) => {
-    console.log('onSpeechVolumeChanged: ', e);
-    this.setState({
-      pitch: e.value,
-    });
-  };
-
-  _startRecognizing = async () => {
-    this.setState({
-      recognized: '',
-      pitch: '',
-      error: '',
-      started: '',
-      results: [],
-      partialResults: [],
-      end: '',
-      done: false,
-      search: '',
-    });
+  async function _startRecognizing (){
+    setRecognized('');
+    setPitch('');
+    setError('');
+    setStarted('');
+    setResults([]);
+    setPartialResults([]);
+    setEnd('');
 
     try {
       await Voice.start('pt-BR');
     } catch (e) {
       console.error(e);
-      this.setState({done: false})
     }
-    
   };
 
 
-  _stopRecognizing = async () => {
+  async function _stopRecognizing(){
     try {
       await Voice.stop();
     } catch (e) {
@@ -148,7 +112,7 @@ class VoiceComand extends Component<Props, State> {
     }
   };
 
-  _cancelRecognizing = async () => {
+  async function _cancelRecognizing(){
     try {
       await Voice.cancel();
     } catch (e) {
@@ -156,70 +120,50 @@ class VoiceComand extends Component<Props, State> {
     }
   };
 
-  _destroyRecognizer = async () => {
+  async function _destroyRecognizer(){
     try {
       await Voice.destroy();
     } catch (e) {
       console.error(e);
     }
-    this.setState({
-      recognized: '',
-      pitch: '',
-      error: '',
-      started: '',
-      results: [],
-      partialResults: [],
-      end: '',
-      done: false,
-      search: '',
-    });
+    setRecognized('');
+    setPitch('');
+    setError('');
+    setStarted('');
+    setResults([]);
+    setPartialResults([]);
+    setEnd('');
   };
 
-  searchPlace = () => {
-    this.state.partialResults.map((result, index) => {
-      this.state.search = result
-      this.state.done = true
-      console.log(this.state.search)
-      console.log(this.state.done)
-    });
+
+  async function searchPlace(){
+    partialResults.map((result:any, index:any) => {
+      useVoice.setSearch(result);
+     });
+    console.log(useVoice.search_voice);
   }
 
-  handlelocationSelected = (data:any, { geometry }:any) => {
-    const { location: {lat: latitude, lng: longitude} } = geometry;
-    this.setState({
-        destination: {
-        latitude: latitude,
-        longitude: longitude,
-        title: data.structured_formatting.main_text,
-      }
-    });
-  }
-  render() {
-
-    return (
-      <View style={styles.container}>
-        {this.state.error ? <Text style={styles.text_results}>Desculpe, não entendi. Tente Novamente</Text> : 
-        this.state.partialResults.map((result, index) => {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.text_results}>Para onde?</Text>
+      {error ? <Text style={styles.text_results}>Desculpe, não entendi. Tente Novamente</Text> : 
+        partialResults.map((result:any, index:any) => {
           return (
             <Text key={`partial-result-${index}`} style={styles.text_results}>
               {result}
             </Text>
           );
         }) } 
-        <TouchableHighlight onPress={this._startRecognizing}>
+        <TouchableHighlight onPress={_startRecognizing}>
           <Image style={styles.buttonVoice} source={require('../../img/voice.png')} />
         </TouchableHighlight>
-        {this.state.partialResults[0] ? 
-          <TouchableHighlight style={styles.buttonIr} onPress={this.searchPlace}> 
+        {partialResults[0] ? 
+          <TouchableHighlight style={styles.buttonIr} onPress={searchPlace}> 
             <Text style={styles.text_results}>Ir</Text>
           </TouchableHighlight> 
           : null}
-        {this.state.done? null : <Places onLocationSelected = {this.handlelocationSelected}
-        search = {this.state.search}></Places>}
-      </View>
-    );
+      </View>)
   }
-}
 
 const styles = StyleSheet.create({
   buttonVoice: {
@@ -251,9 +195,6 @@ const styles = StyleSheet.create({
     fontSize: 26
   }
 });
-
-export default VoiceComand;
-
 
 
 

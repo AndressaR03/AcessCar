@@ -18,7 +18,7 @@ const Details = ({distance, duration}: any ) => (
             <TypeDescription>R${(distance * 2.4).toFixed(2)}</TypeDescription>
 
             <RequestButton onPress={() => {}}>
-                <RequestButtonText>SOLICITAR ACEESSCAR</RequestButtonText>
+                <RequestButtonText>SOLICITAR ACESSCAR</RequestButtonText>
             </RequestButton>
         </Container>
 );

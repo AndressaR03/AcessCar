@@ -1,6 +1,6 @@
-import React, {Component, createRef, Fragment} from 'react';
+import React, {Component, createRef, Fragment, useContext, useState, useEffect, useRef} from 'react';
 import {View, Image, Modal, Text} from 'react-native';
-import MapView from 'react-native-maps';
+import MapView, { MapViewProps } from 'react-native-maps';
 import { Marker } from 'react-native-maps';
 import * as Permissions from 'expo-permissions';
 import * as Location from 'expo-location';
@@ -14,8 +14,7 @@ import markerImage from "../../img/marker.png";
 import Directions from "../Directions";
 import Details from "../Details";
 import VoiceComand from "../Voice";
-import { useNavigation } from '@react-navigation/native';
-
+import { VoiceContext} from '../../context/Voice';
 
 import { 
     Back,
@@ -24,32 +23,48 @@ import {
     LocationTimeText,
     LocationTimeTextSmall,
     LocationTimeBox,
-    VoiceButton
+    VoiceButton,
+    ModalDetails
   } from './styles';
 
-export default class Map extends Component{
-    state:any = {
-        mapRegion: null,
-        destination: null,
-        location: null,
-        hasLocationPermissions: false,
-        duration: null,
-        locationResult: null,
-        distance: null,
-        last_tap: null,
-        isVisible: false,
-      };
-      async componentDidMount() {
-        this._getLocationAsync();
 
-      }
+interface Props {
+  onSearch?: onSearch
+};
+  
+interface onSearch {
+  onSearch?:string
+};
+
+export default function Map (props:Props){
+
+  const [mapRegion, setmapRegion] = useState<any>(null);
+  const [destination, setdestination] = useState<any>(null);
+  const [location, setlocation] = useState<any>(null);
+  const [hasLocationPermissions, sethasLocationPermissions] = useState(false);
+  const [duration, setduration] = useState<any>(null);
+  const [locationResult, setlocationResult] = useState<any>();
+  const [distance, setdistance] = useState(null);
+  const [isVisibleVoice, setisVisibleVoice] = useState(false);
+  const [isVisibleDetails, setisVisibleDetails] = useState(false);
+  const [searchvoice, setsearchvoice] = useState(null);
  
-      _handleMapRegionChange = (mapRegion:any) => {
-        console.log(mapRegion);
-        this.setState({ mapRegion });
-      };
+
+  const useVoice = useContext(VoiceContext);
+
+  useEffect(() => {
+    const Load = async () => {
+      const getLocation = await _getLocationAsync();
+    }
+    Load();
+  }, []);
+ 
+  function _handleMapRegionChange (mapRegion:any) {
+    console.log(mapRegion);
+    setmapRegion(mapRegion)
+  };    
     
-      _attemptReverseGeocodeAsync = async (coords:any) => {
+  async function _attemptReverseGeocodeAsync (coords:any){
         try {
           let result = await Location.reverseGeocodeAsync(coords);
           return result;
@@ -58,57 +73,44 @@ export default class Map extends Component{
         }
       };
     
-      _getLocationAsync = async () => {
+  async function _getLocationAsync() {
        let { status } = await Permissions.askAsync(Permissions.LOCATION);
        if (status !== 'granted') {
-         this.setState({
-           locationResult: 'Permission to access location was denied',
-         });
+         setlocationResult('Permission to access location was denied');
        } else {
-         this.setState({ hasLocationPermissions: true });
+         sethasLocationPermissions(true);
        }
     
        let location = await Location.getCurrentPositionAsync({});
-       this.setState({ locationResult: JSON.stringify(location) });
+       setlocationResult({locationResult: JSON.stringify(location)});
        
        const coords = {latitude: location.coords.latitude, longitude: location.coords.longitude }
-       this._attemptReverseGeocodeAsync(coords).then(result => {
+       _attemptReverseGeocodeAsync(coords).then(result => {
         const adress = result[0].street;
     
-        this.setState({
-          location: adress
-        })
+        setlocation(adress)
       })
     
        // Center the map on the location we just fetched.
-        this.setState({mapRegion: { latitude: location.coords.latitude, longitude: location.coords.longitude, latitudeDelta: 0.0922, longitudeDelta: 0.0421 }});
+         setmapRegion({latitude: location.coords.latitude, longitude: location.coords.longitude, latitudeDelta: 0.0922, longitudeDelta: 0.0421});
       };
     
-      handlelocationSelected = (data:any, { geometry }:any) => {
+      function handlelocationSelected(data:any, { geometry }:any){
         const { location: {lat: latitude, lng: longitude} } = geometry;
-        this.setState({
-          destination: {
-            latitude: latitude,
-            longitude: longitude,
-            title: data.structured_formatting.main_text,
-          }
-        });
+        setdestination({latitude: latitude, longitude: longitude, title: data.structured_formatting.main_text,})
+        setisVisibleDetails(true)
       }
     
-      handleBack = ( ) => {
-        this.setState({
-          destination: null
-        })
-    
+      function handleBack( ){
+        setdestination(null)
+        useVoice.setSearch('');
       }
 
-      handleVoice =() => {
-        const {navigate} = useNavigation ();
-        navigate('Voice')
-        console.log('Here')
-      }
+      function handleVoiceSearch(result:any){
+       console.log(result);
+      };
 
-      mapStyle = [
+      const mapStyle = [
         {
           "elementType": "geometry",
           "stylers": [
@@ -270,20 +272,18 @@ export default class Map extends Component{
         }
       ]
 
-    render(){
-      
-        const mapView = createRef<MapView>();
-        const { mapRegion, destination, duration, location, distance} = this.state;
+        const mapViewRef = React.useRef()  as React.MutableRefObject<MapView>;;
+        const {search_voice} = useContext(VoiceContext);
+        //const { mapRegion, destination, duration, location, distance} = this.state;
         
         return(
             <>
-            
             <View style={{flex: 1}}>
                 <MapView
                     style={{flex: 1 }}
                     region={mapRegion}
-                    ref={mapView}
-                    customMapStyle={this.mapStyle}
+                    ref={mapViewRef}
+                    customMapStyle={mapStyle}
                     showsUserLocation
                     loadingEnabled
                 >
@@ -293,9 +293,10 @@ export default class Map extends Component{
                 origin={mapRegion}
                 destination={destination}
                 onReady={(result: any) => {
-                  this.setState({duration: Math.floor(result.duration)})
-                  this.setState({distance: result.distance});
-                  mapView.current?.fitToCoordinates(result.coordinates, {
+                  setduration(Math.floor(result.duration))
+                  setdistance(result.distance);
+                  console.log(result)
+                  mapViewRef.current?.fitToCoordinates(result.coordinates, {
                    edgePadding: {
                       right: getPixelSize(50),
                       left: getPixelSize(50),
@@ -333,17 +334,26 @@ export default class Map extends Component{
 
           {destination ? (
             <Fragment>
-              <Back onPress={this.handleBack}>
+              <ModalDetails 
+              animationType={'slide'} 
+              transparent={true}
+              visible={isVisibleDetails}
+              onRequestClose={() => {
+              setdestination(null);
+              useVoice.setSearch("");
+              }}>
+              <Back onPress={handleBack}>
                 <Image source={backImage} />
               </Back>
               <Details
               distance = {distance}
               duration = {duration} />
+              </ModalDetails>
             </Fragment>
           ) : (
             <>
-            <Search onLocationSelected = {this.handlelocationSelected} />
-            <VoiceButton onPress = {() => this.setState({ isVisible: true })}>
+            <Search onLocationSelected = {handlelocationSelected} />
+            <VoiceButton onPress = {() => setisVisibleVoice(true)}>
               <Image style={{width: 50, height: 50}} source={require('../../img/voice.png')} />
             </VoiceButton>
             </>
@@ -351,17 +361,15 @@ export default class Map extends Component{
             <Modal
             animationType={'slide'} 
             transparent={false}
-            visible={this.state.isVisible}
+            visible={isVisibleVoice}
             onRequestClose={() => {
-            this.setState({ isVisible: false });
+            setisVisibleVoice(false);
             }}
             >
             <VoiceComand></VoiceComand>
+            <VoiceButton onPress = {() => {setisVisibleVoice(false)}}><Text>Fechar</Text></VoiceButton>
             </Modal>
             </View>
             </>
         );
     }
-
-}
-
