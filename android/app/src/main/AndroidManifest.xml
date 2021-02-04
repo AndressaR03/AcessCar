@@ -26,7 +26,7 @@
     <meta-data android:name="expo.modules.updates.EXPO_UPDATES_LAUNCH_WAIT_MS" android:value="0"/>
     <meta-data
       android:name="com.google.android.geo.API_KEY"
-      android:value="AIzaSyBMafnS7Tw3QxAkaBQO0-V9DsueL3SjsxY"/>
+      android:value="MAPS_API_KEY"/>
    <uses-library android:name="org.apache.http.legacy" android:required="false"/>
     
     <activity android:name=".MainActivity" android:label="@string/app_name" android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode" android:launchMode="singleTask" android:windowSoftInputMode="adjustResize" android:theme="@style/Theme.App.SplashScreen">
