@@ -2,49 +2,41 @@ import React from 'react'
 import styles from './styles'
 import {
   View,
-  Image,
   TouchableOpacity,
   Text,
   TextInput,
   KeyboardAvoidingView,
-  ScrollView,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import 'react-native-gesture-handler';
-
+import { ScrollView } from 'react-native-gesture-handler';
 
 //import * as firebase from 'firebase-tools';
 //import 'firebase/firestore'
 //import {firebaseConfig} from '../../back/confgFireBase'
-
 
 const Senha = () => {
   const { navigate } = useNavigation();
   function NextPageCadastrar() {
     navigate('Cadastro')
   }
-  return (
-    <ScrollView style={styles.scrollView}>
+  return (   
       <KeyboardAvoidingView style={styles.container}>
-        <View>
-          <Text style={styles.cadastro}>CADASTRO</Text>
-          <Text style={styles.intro}>Crie uma senha de acesso</Text>
-        </View >
-        <View style={styles.campos}>
-          <TextInput  placeholderTextColor="white" style={styles.senha} placeholder='Senha min. (6 digitos)' secureTextEntry={true} />
-          <TextInput  placeholderTextColor="white" style={styles.senha} placeholder='Confirmar Senha' secureTextEntry={true} />
-
-          <View style={{flex: 1, flexDirection: 'row'}}>
-                <TouchableOpacity style={styles.button} onPress={() => navigate("Cadastro")}>
-            <Text style={{ fontSize: 20, color: '#1c1c1c', alignItems: "center" }}>Voltar</Text>
-          </TouchableOpacity>  
-          <TouchableOpacity style={styles.button} onPress={() => navigate("Necessidades")}>
-            <Text style={{ fontSize: 20, color: '#1c1c1c', alignItems: "center" }}>Próximo</Text>
-          </TouchableOpacity>   
-      </View>      
-        </View>
+          <Text style={{fontSize:28, color:'#19cdce'}}>CADASTRAR SENHA</Text>
+          <Text style={{fontSize:16, color:'#fff', paddingTop:5}}>Crie sua senha de acesso</Text>
+          <View style={styles.campos}>
+            <TextInput  placeholderTextColor="white" style={styles.senha} placeholder='Senha min. (6 digitos)' secureTextEntry={true} />
+            <TextInput  placeholderTextColor="white" style={styles.confirmarsenha} placeholder='Confirmar Senha' secureTextEntry={true} />
+          </View>
+          <View style={styles.footer}>
+            <TouchableOpacity style={styles.button1} onPress={() => navigate("Telefone")}>
+              <Text style={{ fontSize: 20, color: '#1c1c1c', alignItems: "center",fontWeight:'bold', }}>Voltar</Text>
+            </TouchableOpacity>  
+            <TouchableOpacity style={styles.button2} onPress={() => navigate("Necessidades")}>
+              <Text style={{ fontSize: 20, color: '#1c1c1c', alignItems: "center",fontWeight:'bold', }}>Avançar</Text>
+            </TouchableOpacity>            
+          </View>
       </KeyboardAvoidingView>
-    </ScrollView>
   );
 }
 export default Senha;

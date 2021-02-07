@@ -4,32 +4,43 @@ const styles = StyleSheet.create({
     container: {
         backgroundColor: '#1C1C1C',
         flex: 1,
-        flexDirection: "column",
         alignItems: "center",
-        justifyContent: "flex-start",
+        paddingTop: 70,
     },
     visao: {
-        backgroundColor: '#1C1C1C',
+        backgroundColor: 'red',
         flex: 1,
-        flexDirection: "column",
         alignItems: "center",
-        justifyContent: "flex-start"
+        borderBottomColor:'#fff',
+        borderBottomWidth:2,
+
+
     },
-    button: {
-        width: 140,
+    footer:{
+        flex:1,
+        position:'absolute',
+        bottom:0,
+        flexDirection: 'row',
+        paddingBottom:20, 
+
+      },
+      button1: {
+        width: 150,
         height: 45,
         backgroundColor: '#19cdce',
         alignItems: 'center',
         padding: 10,
         borderRadius: 2,
-        marginTop: 77,
-        justifyContent:'space-between',
-        marginStart:15
-    },
-    scrollView: {
-        backgroundColor: '#1C1C1C',
-
-    },
+      },
+      button2: {
+        width: 150,
+        height: 45,
+        backgroundColor: '#19cdce',
+        alignItems: 'center',
+        padding: 10,
+        borderRadius: 2,
+        marginLeft:20,
+      },
     cadastro: {
         textAlign: 'center',
         flexDirection: 'column',
@@ -39,7 +50,24 @@ const styles = StyleSheet.create({
         fontSize: 30,
         marginTop: 50,
         marginBottom: 10,
-
+    },
+    selecao: {
+        textAlign: 'center',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        color: 'white',
+        fontSize: 16,
+        marginTop: 60,
+        flexDirection: 'row',
+    },
+    selecao2: {
+        textAlign: 'center',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+        color: 'white',
+        fontSize: 16,
+        marginTop: 10,
+        flexDirection: 'row',
     },
     intro: {
         textAlign: 'center',
@@ -47,8 +75,10 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         color: 'white',
         fontSize: 15,
-        marginTop: 15,
-        flexDirection: 'row'
+        marginTop: 20,
+        flexDirection: 'row',
+        paddingLeft: 15
+
     },
     intro2: {
         textAlign: 'center',
@@ -58,6 +88,7 @@ const styles = StyleSheet.create({
         fontSize: 15,
         marginTop: 10,
         marginBottom: 40,
+
     },
    
 });

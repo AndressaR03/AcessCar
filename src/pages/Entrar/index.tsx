@@ -44,36 +44,30 @@ const Entrar = () => {
       console.log(err);
     }
   }
-
-
   return(
-    <ScrollView style={styles.scrollView}>
-    <KeyboardAvoidingView style={styles.container}>
-      <View style={styles.container}>
+    <KeyboardAvoidingView style={styles.container}>      
       <Image 
-         style= {{width:450, height:200, marginTop: 50,}}
-         source={require('../../img/logo1.png')}
-       />
-      </View >
-      <View style={styles.container}>
+         style= {{width:200, height:170, marginTop: 80, alignItems:'center', justifyContent:'center'}}
+         source={require('../../img/logo2.png')}
+       />     
+      <View style={styles.campos}>
         {/*<TextInput underlineColorAndroid='transparent' placeholder='Nome' placeholderTextColor='#abb2b9' style={styles.nome2} />*/}
-        <TextInput placeholderTextColor="white" style={styles.nome} placeholder='Digite seu email'
+        <TextInput placeholderTextColor="white" style={styles.email} placeholder='Digite seu email'
          onChangeText={email => state.email = email}/>
         <TextInput placeholderTextColor="white" style={styles.senha} placeholder='Digite sua senha' secureTextEntry={true}
-         onChangeText={senha => state.password = senha}/>
-        <TouchableOpacity style={styles.button} onPress = {login}>
-          <Text style={{fontSize:20, color:'#1c1c1c', alignItems: "center"}}>Entrar</Text>
-        </TouchableOpacity>
-          
+         onChangeText={senha => state.password = senha}/>    
           { state.isAuthenticated ? '' : <Text style={{color: state.alert}}>Usuário ou senha incorretos.</Text>}
-        
         <TouchableOpacity > 
           <Text style={styles.link}>Esqueci minha senha</Text>
-        </TouchableOpacity>
-
+        </TouchableOpacity> 
+        <View style={styles.footer}>
+          <TouchableOpacity style={styles.button} onPress = {login}>
+            <Text style={{ fontSize: 20, color: '#1c1c1c', alignItems: "center",fontWeight:'bold', }}>Entrar</Text>
+          </TouchableOpacity>
+        </View>       
       </View>
+      
     </KeyboardAvoidingView>
-    </ScrollView>
      );
 }
 export default Entrar;

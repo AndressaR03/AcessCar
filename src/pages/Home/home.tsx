@@ -13,8 +13,8 @@ const Login = () =>  {
     return (
     <View style={styles.container}>
       <Image 
-        style= {{width:520, height:300}}
-        source={require('../../img/logo1.png')}
+        style= {{width:220, height:250, marginBottom:40}}
+        source={require('../../img/logo2.png')}
       />
       <TouchableOpacity style={styles.button} onPress = {() => navigate("Entrar")}>
         <Text style={styles.texto}>Entrar</Text>

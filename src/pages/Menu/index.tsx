@@ -7,11 +7,8 @@ import voice from '../../images/voice.png';
 import '../../image.ts';
 import createAppContainer from '../../routes/AppPageRoutes'
 import { NavigationContainer } from '@react-navigation/native';
-
 const { width: screenWidth } = Dimensions.get('window')
-
 import { useNavigation } from '@react-navigation/native';
-
 
 function Menu(){
 
@@ -25,7 +22,11 @@ function Menu(){
         },
         {
             title: "Pagamento",
-            page: "Pagamento"
+            page: "Cartao"
+        },
+        {
+            title: "Viagem",
+            page: "Viagem",
         }]
     }
 
