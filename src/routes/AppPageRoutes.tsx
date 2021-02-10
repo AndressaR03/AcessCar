@@ -10,6 +10,10 @@ import Menu from '../pages/Menu';
 import Cadastro from '../pages/Cadastro';
 import Pagamento from '../pages/Pagamento';
 import Senha from '../pages/Senha';
+import Telefone from '../pages/Telefone';
+import Viagem from '../pages/Viagem';
+import Cartao from '../pages/Cartao';
+
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -19,6 +23,14 @@ function AppPageRoutes() {
       <Screen
         name="Login"
         component={Login}
+      />
+      <Screen
+        name="Viagem"
+        component={Viagem}
+      />
+      <Screen
+        name="Cartao"
+        component={Cartao}
       />
       <Screen
         name="Necessidades"
@@ -36,7 +48,10 @@ function AppPageRoutes() {
         name="Senha"
         component={Senha}
       />
-
+      <Screen
+        name="Telefone"
+        component={Telefone}
+      />
       <Screen
         name="Cadastro"
         component={Cadastro}

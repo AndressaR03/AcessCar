@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
     paddingTop:10,
   },
   button:{
-    width:250,
+    width:320,
     height:50,
     backgroundColor:'#19cdce',
     alignItems:"center",
@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
   texto:{
     fontSize:22,
     color:'#1C1C1C',
+    fontWeight:'bold',
   }, 
   });
   export default styles;

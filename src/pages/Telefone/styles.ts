@@ -9,9 +9,9 @@ const styles = StyleSheet.create({
       },
       campos:{
         alignItems: "center",
-        paddingTop: 90,
+        paddingTop: 100,
       },
-      senha:{
+      telefone:{
         height: 50, 
         width: 320,
         paddingLeft: 10,
@@ -21,18 +21,6 @@ const styles = StyleSheet.create({
         borderBottomWidth:1,
         color:'white',
         fontSize:16,
-      },
-      confirmarsenha:{
-        height: 50, 
-        width: 320,
-        paddingLeft: 10,
-        backgroundColor: '#31343d',
-        borderRadius:1,
-        borderBottomColor: '#19cdce',
-        borderBottomWidth:1,
-        color:'white',
-        fontSize:16,
-        marginTop:20,
       },
       footer:{
         flex:1,
@@ -57,6 +45,7 @@ const styles = StyleSheet.create({
         padding: 10,
         borderRadius: 2,
         marginLeft:20,
+        color:'black'
       },
 });
   export default styles;
