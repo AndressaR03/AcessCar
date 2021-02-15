@@ -6,7 +6,7 @@ import {Platform } from 'react-native';
 
 export const Container = styled.View`
     background: #1C1C1C;
-    height: 300px;
+    height: 400px;
     width: 100%;
     position: absolute;
     bottom: 0;
@@ -23,13 +23,15 @@ export const Container = styled.View`
 `;
 
 export const TypeTitle = styled.Text`
-    font-size: 22px;
+    font-size: 24px;
     color: #FFF;
+    padding-top: 10px;
+    padding-bottom: 40px;
 `;
 
 export const TypeDescription = styled.Text`
     color: #FFF;
-    font-size: 20px;
+    font-size: 16px;
     flex:3;
     padding: 15px;
     align-items: flex-end;
@@ -37,9 +39,7 @@ export const TypeDescription = styled.Text`
 
 export const TypeCarDescription = styled.Text`
     color: #FFF;
-    font-size: 18px; 
-    flex:3;
-    padding: 10px 
+    font-size: 24px;
 `;
 
 export const TypeImage = styled.Image`
@@ -48,13 +48,25 @@ export const TypeImage = styled.Image`
     flex: 3;
 `;
 
-export const RequestButton = styled.TouchableOpacity`
+export const CloseButton = styled.TouchableOpacity`
     background: #19cdce;
     justify-content: center;
     align-items: center;
-    height: 44px;
+    height: 50px;
+    width: 170px;
     align-self: stretch;
     margin-top: 10px; 
+`;
+
+export const CancelButton = styled.TouchableOpacity`
+    border: 1px solid #FF0000;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    width: 170px;
+    align-self: stretch;
+    margin-top: 10px; 
+    margin-right: 10px;
 `;
 
 export const RequestButtonText = styled.Text`
@@ -63,46 +75,3 @@ export const RequestButtonText = styled.Text`
     font-size: 18px;
 `;
 
-export const PaymethodButton = styled.TouchableOpacity`
-    justify-content: center;
-    align-items: center;
-    height: 44px;
-    align-self: stretch;
-    margin-top: 10px;
-    padding: 40px;
-
-`;
-
-export const PaymethodButtonText = styled.Text`
-    color: #19cdce;
-    font-weight: bold;
-    font-size: 20px;
-`;
-
-export const ButtonText = styled.Text`
-    color: #19cdce;
-    font-weight: bold;
-    font-size: 24px;
-`;
-
-export const ModalPaymethod = styled.Modal`
-    background: #1C1C1C;
-    color: #1C1C1C;
-    width: 100%;
-    opacity: 1;
-    bottom: 0;
-    padding: 20px;
-`
-export const SaveButton = styled.TouchableOpacity`
-    background: #19cdce;
-    justify-content: center;
-    align-items: center;
-    height: 44px;
-    width: 360px;
-    align-self: center;
-    margin-top: 10px; 
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    border-radius: 4px;
-`;

@@ -140,13 +140,13 @@ export default function VoiceComand (props:Props) {
     partialResults.map((result:any, index:any) => {
       useVoice.setSearch(result);
      });
-    console.log(useVoice.search_voice);
+     useVoice.setisVisibleVoice(false);
   }
 
   return (
     <View style={styles.container}>
       <Text style={styles.text_results}>Para onde?</Text>
-      {error ? <Text style={styles.text_results}>Desculpe, não entendi. Tente Novamente</Text> : 
+      {error ? <Text style={styles.text_results}>Desculpe, não entendi. Pode repitir?</Text> : 
         partialResults.map((result:any, index:any) => {
           return (
             <Text key={`partial-result-${index}`} style={styles.text_results}>

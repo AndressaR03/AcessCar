@@ -32,7 +32,7 @@ interface IRecipeProps {
                     minLength={0}
                     onPress={props.onLocationSelected}
                     query={{
-                        key: 'MAPS_API_KEY',
+                        key: 'AIzaSyBMafnS7Tw3QxAkaBQO0-V9DsueL3SjsxY',
                         language: 'pt',
                     }}
                     textInputProps={{

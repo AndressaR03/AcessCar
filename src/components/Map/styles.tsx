@@ -82,3 +82,12 @@ export const ModalDetails = styled.Modal`
     bottom: 0;
     padding: 20px;
 `
+export const ModalDriver = styled.Modal`
+    height: 100px;
+    width: 100%;
+    opacity: 1;
+    bottom: 0;
+    padding: 20px;
+`
+
+

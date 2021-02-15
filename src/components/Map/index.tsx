@@ -11,10 +11,14 @@ import "../../image.ts";
 import {Platform } from 'react-native';
 import Search from '../Search';
 import markerImage from "../../img/marker.png";
+import markerAcess from "../../img/acess.png";
 import Directions from "../Directions";
 import Details from "../Details";
 import VoiceComand from "../Voice";
 import { VoiceContext} from '../../context/Voice';
+import { TravelContext} from '../../context/Travel';
+import Travel from '../Travel';
+import InfoTravel from "../InfoTravel"
 
 import { 
     Back,
@@ -24,7 +28,8 @@ import {
     LocationTimeTextSmall,
     LocationTimeBox,
     VoiceButton,
-    ModalDetails
+    ModalDetails,
+    ModalDriver
   } from './styles';
 
 
@@ -45,12 +50,12 @@ export default function Map (props:Props){
   const [duration, setduration] = useState<any>(null);
   const [locationResult, setlocationResult] = useState<any>();
   const [distance, setdistance] = useState(null);
-  const [isVisibleVoice, setisVisibleVoice] = useState(false);
-  const [isVisibleDetails, setisVisibleDetails] = useState(false);
   const [searchvoice, setsearchvoice] = useState(null);
+  const [motorista, setmotorista] = useState<any>(null);
  
 
   const useVoice = useContext(VoiceContext);
+  const useTravel = useContext(TravelContext);
 
   useEffect(() => {
     const Load = async () => {
@@ -59,11 +64,6 @@ export default function Map (props:Props){
     Load();
   }, []);
  
-  function _handleMapRegionChange (mapRegion:any) {
-    console.log(mapRegion);
-    setmapRegion(mapRegion)
-  };    
-    
   async function _attemptReverseGeocodeAsync (coords:any){
         try {
           let result = await Location.reverseGeocodeAsync(coords);
@@ -98,17 +98,16 @@ export default function Map (props:Props){
       function handlelocationSelected(data:any, { geometry }:any){
         const { location: {lat: latitude, lng: longitude} } = geometry;
         setdestination({latitude: latitude, longitude: longitude, title: data.structured_formatting.main_text,})
-        setisVisibleDetails(true)
+        useTravel.setDestination({latitude: latitude, longitude: longitude, title: data.structured_formatting.main_text,})
+        useVoice.setisVisibleDetails(true)
       }
     
       function handleBack( ){
-        setdestination(null)
+        setdestination(null);
+        useTravel.setDestination(null);
+        useVoice.setisVisibleDriver(false);
         useVoice.setSearch('');
       }
-
-      function handleVoiceSearch(result:any){
-       console.log(result);
-      };
 
       const mapStyle = [
         {
@@ -272,10 +271,19 @@ export default function Map (props:Props){
         }
       ]
 
-        const mapViewRef = React.useRef()  as React.MutableRefObject<MapView>;;
+      function handleDriver(){
+       // setdriverLocation(driver[0].location);
+      };
+
+      function SaveDataTravel(){
+        useTravel.setOrigem(location);
+        useTravel.setDestination(destination);
+        useTravel.setTime(duration);
+      };
+
+        const mapViewRef = React.useRef()  as React.MutableRefObject<MapView>;
         const {search_voice} = useContext(VoiceContext);
-        //const { mapRegion, destination, duration, location, distance} = this.state;
-        
+
         return(
             <>
             <View style={{flex: 1}}>
@@ -287,7 +295,40 @@ export default function Map (props:Props){
                     showsUserLocation
                     loadingEnabled
                 >
-                { destination && ( 
+              {(useTravel.driverlocation && !useTravel.cancel) && (
+              <Fragment>
+              <Directions
+                origin={mapRegion}
+                destination={useTravel.driverlocation}
+                onReady={(result: any) => {
+                  setduration(Math.floor(result.duration))
+                  setdistance(result.distance);
+                  useTravel.setTimeChegada(Math.floor(result.duration));
+                  mapViewRef.current?.fitToCoordinates(result.coordinates, {
+                   edgePadding: {
+                      right: getPixelSize(50),
+                      left: getPixelSize(50),
+                      top: getPixelSize(50),
+                      bottom: getPixelSize(350)
+                    }
+                  });
+                }}
+                />
+                <Marker
+                  coordinate={useTravel.driverlocation}
+                  anchor={{x: 0, y:0}}
+                  image={markerAcess}
+                >
+                </Marker>
+                <Marker
+                  coordinate={mapRegion}
+                  anchor={{x: 0, y:0}}
+                  icon={markerImage}
+                >
+                </Marker>
+              </Fragment>
+                )}
+          {(useTravel.destination && !useTravel.driverlocation) && ( 
             <Fragment>
               <Directions
                 origin={mapRegion}
@@ -295,7 +336,6 @@ export default function Map (props:Props){
                 onReady={(result: any) => {
                   setduration(Math.floor(result.duration))
                   setdistance(result.distance);
-                  console.log(result)
                   mapViewRef.current?.fitToCoordinates(result.coordinates, {
                    edgePadding: {
                       right: getPixelSize(50),
@@ -327,19 +367,17 @@ export default function Map (props:Props){
                     <LocationText>{location}</LocationText>
                   </LocationBox>
                 </Marker>
-                
               </Fragment>
            ) }  
           </MapView>
 
-          {destination ? (
+          {useTravel.destination ? ( 
             <Fragment>
               <ModalDetails 
               animationType={'slide'} 
               transparent={true}
-              visible={isVisibleDetails}
+              visible={useVoice.isVisibleDetails}
               onRequestClose={() => {
-              setdestination(null);
               useVoice.setSearch("");
               }}>
               <Back onPress={handleBack}>
@@ -349,25 +387,35 @@ export default function Map (props:Props){
               distance = {distance}
               duration = {duration} />
               </ModalDetails>
-            </Fragment>
+              <ModalDriver
+              animationType={'slide'} 
+              transparent={true}
+              visible={useVoice.isVisibleDriver}
+              onShow={SaveDataTravel}
+              onRequestClose={() => {}}>
+                <Travel></Travel>
+              </ModalDriver>
+            </Fragment> 
           ) : (
             <>
             <Search onLocationSelected = {handlelocationSelected} />
-            <VoiceButton onPress = {() => setisVisibleVoice(true)}>
+            <VoiceButton onPress = {() => useVoice.setisVisibleVoice(true)}>
               <Image style={{width: 50, height: 50}} source={require('../../img/voice.png')} />
             </VoiceButton>
             </>
             )} 
+
+
+          {(useTravel.driverlocation && !useVoice.isVisibleDriver && !useTravel.cancel)  && <InfoTravel></InfoTravel>}
             <Modal
             animationType={'slide'} 
             transparent={false}
-            visible={isVisibleVoice}
+            visible={useVoice.isVisibleVoice}
             onRequestClose={() => {
-            setisVisibleVoice(false);
+            useVoice.setisVisibleVoice(false);
             }}
             >
             <VoiceComand></VoiceComand>
-            <VoiceButton onPress = {() => {setisVisibleVoice(false)}}><Text>Fechar</Text></VoiceButton>
             </Modal>
             </View>
             </>

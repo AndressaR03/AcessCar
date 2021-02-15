@@ -6,9 +6,8 @@ import {Platform } from 'react-native';
 
 export const Container = styled.View`
     background: #1C1C1C;
-    height: 300px;
-    width: 100%;
-    position: absolute;
+    height: 100px;
+    width: 300px;
     bottom: 0;
     shadow-color: #000;
     shadow-offset: 0 0;
@@ -38,8 +37,6 @@ export const TypeDescription = styled.Text`
 export const TypeCarDescription = styled.Text`
     color: #FFF;
     font-size: 18px; 
-    flex:3;
-    padding: 10px 
 `;
 
 export const TypeImage = styled.Image`
@@ -63,46 +60,3 @@ export const RequestButtonText = styled.Text`
     font-size: 18px;
 `;
 
-export const PaymethodButton = styled.TouchableOpacity`
-    justify-content: center;
-    align-items: center;
-    height: 44px;
-    align-self: stretch;
-    margin-top: 10px;
-    padding: 40px;
-
-`;
-
-export const PaymethodButtonText = styled.Text`
-    color: #19cdce;
-    font-weight: bold;
-    font-size: 20px;
-`;
-
-export const ButtonText = styled.Text`
-    color: #19cdce;
-    font-weight: bold;
-    font-size: 24px;
-`;
-
-export const ModalPaymethod = styled.Modal`
-    background: #1C1C1C;
-    color: #1C1C1C;
-    width: 100%;
-    opacity: 1;
-    bottom: 0;
-    padding: 20px;
-`
-export const SaveButton = styled.TouchableOpacity`
-    background: #19cdce;
-    justify-content: center;
-    align-items: center;
-    height: 44px;
-    width: 360px;
-    align-self: center;
-    margin-top: 10px; 
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    border-radius: 4px;
-`;
