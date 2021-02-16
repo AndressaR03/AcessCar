@@ -34,8 +34,10 @@ function Details( {distance, duration}:any){
     const default_price = 8.50;
     const [isVisible, setisVisible] = useState(false)
     
-
+    //Carlos, get cartões do Banco
     const paymethod = [{Forma: "Dinheiro"}, {Forma: "Cartão final xx38 (Crédito)"}, {Forma: "Cartão final xx97"}]
+
+    //paymethod.push({Forma: })
 
     const useVoice = useContext(VoiceContext);
     const useTravel = useContext(TravelContext);
@@ -61,6 +63,10 @@ function Details( {distance, duration}:any){
         useVoice.setisVisibleDriver(true);
         useTravel.setCancel(false)
         get_Travel_cod();
+        //Carlos, subir informações da corrida
+        //price, destination, origem, travel_cod, confirmation, time, paymethod
+
+        //Obs.: Subir passageiroID e motoristaID na collection de Corrida
     }
     
     const options4 = [
