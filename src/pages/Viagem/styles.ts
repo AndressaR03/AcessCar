@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     },
     endereco:{
         height: 50, 
-        width: 320,
+        width: 105,
         paddingLeft: 10,
         backgroundColor: '#fff',
         borderRadius:10,
@@ -49,6 +49,17 @@ const styles = StyleSheet.create({
         justifyContent:'center',
         textAlignVertical:'center',
         fontWeight:'bold',
+    },
+    list:{
+        height: 50, 
+        width: 320,
+        paddingLeft: 10,
+        backgroundColor: '#fff',
+        borderRadius:10,
+        marginBottom:20,
+        justifyContent:'center',
+        textAlignVertical:'center',
+        flexDirection: "row",
     },
     footer:{
         position:'absolute',

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import styles from './styles'
 import {
   StyleSheet,  
@@ -12,15 +12,26 @@ import {
 } from 'react-native';
 import 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
-import firebase from 'react-native-firebase';
+import firebase, { auth } from 'react-native-firebase';
+import AuthContext from "../../context/Auth"
 
 
-const Entrar = () => {
+function Entrar () {
+
+  //Importando o Context API que contém as informações de login. 
+  const {signed, signIn, user} = useContext(AuthContext);
   const {navigate} = useNavigation ();
-  function NextPageEntrar (){
-      navigate('Cadastro') 
-  }
 
+  //Simulação de autenticação para criação de fluxo de rotas
+  async function handleSignIn() {
+    signIn();
+  }
+  // ----- end ---- 
+
+
+
+
+  // Login with Firebase. 
   const state = {
     email: '',
     password: '',
@@ -44,6 +55,10 @@ const Entrar = () => {
       console.log(err);
     }
   }
+  // -------- end -------------
+
+
+
   return(
     <KeyboardAvoidingView style={styles.container}>      
       <Image 
@@ -61,7 +76,7 @@ const Entrar = () => {
           <Text style={styles.link}>Esqueci minha senha</Text>
         </TouchableOpacity> 
         <View style={styles.footer}>
-          <TouchableOpacity style={styles.button} onPress = {login}>
+          <TouchableOpacity style={styles.button} onPress = {handleSignIn}>
             <Text style={{ fontSize: 20, color: '#1c1c1c', alignItems: "center",fontWeight:'bold', }}>Entrar</Text>
           </TouchableOpacity>
         </View>       

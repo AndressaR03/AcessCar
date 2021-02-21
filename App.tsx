@@ -1,16 +1,17 @@
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import React  from 'react';
-import Routes from './src/routes/AppPageRoutes';
-import { Provider as PaperProvider } from 'react-native-paper';
+import Routes from './src/routes';
+import {AuthProvider} from "./src/context/Auth"
+
 
 const App = () => {
   return (
     <>
       <NavigationContainer>
-        <PaperProvider>
-          <Routes/>
-        </PaperProvider>
+        <AuthProvider>
+            <Routes/>
+        </AuthProvider>
       </NavigationContainer>
     </>        
   );

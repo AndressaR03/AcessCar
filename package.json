@@ -8,6 +8,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@react-native-community/async-storage": "^1.12.1",
     "@react-native-community/masked-view": "0.1.10",
     "@react-native-community/voice": "^1.1.9",
     "@react-navigation/native": "^5.8.0",
@@ -29,7 +30,7 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-native": "~0.63.3",
-    "react-native-elements": "^3.1.0",
+    "react-native-elements": "^3.2.0",
     "react-native-firebase": "^5.6.0",
     "react-native-gesture-handler": "~1.7.0",
     "react-native-google-places-autocomplete": "^2.1.2",

@@ -1,5 +1,5 @@
-import React, {Component ,useRef, useState, useEffect } from 'react';
-import {View, Dimensions, StyleSheet, Platform, Text, Image, ImageBackground, SafeAreaView, InteractionManager} from "react-native";
+import React, {Component ,useRef, useState, useEffect, useContext } from 'react';
+import {View, Dimensions, StyleSheet, Platform, Text, Image, ImageBackground, SafeAreaView, InteractionManager, Button} from "react-native";
 import 'react-native-gesture-handler';
 import { ScrollView, TextInput, TouchableOpacity } from 'react-native-gesture-handler';
 import Carousel, { ParallaxImage } from 'react-native-snap-carousel';
@@ -9,10 +9,11 @@ import createAppContainer from '../../routes/AppPageRoutes'
 import { NavigationContainer } from '@react-navigation/native';
 const { width: screenWidth } = Dimensions.get('window')
 import { useNavigation } from '@react-navigation/native';
-
+import AuthContext from '../../context/Auth'
 function Menu(){
 
     const {navigate} = useNavigation();
+    const {signOut} = useContext(AuthContext);
 
     const state = {
         entries: [
@@ -29,6 +30,10 @@ function Menu(){
             page: "Viagem",
         }]
     }
+
+    function handleSignOut(){
+        signOut();
+    };
 
     function _renderItem ({item}:any){
        
@@ -53,6 +58,7 @@ function Menu(){
                 data={state.entries}
                 renderItem={_renderItem}
                 />
+                <Button title="Logout" onPress={handleSignOut}/>
             </View>
             </>
     );

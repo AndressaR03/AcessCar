@@ -1,4 +1,4 @@
-import React, { useRef, useEffect , useContext} from "react";
+import React, { useRef, useEffect , useContext,useState} from "react";
 import { View, Button , Text, Alert} from "react-native";
 import RBSheet from "react-native-raw-bottom-sheet";
 import Driver from '../Driver'
@@ -11,13 +11,20 @@ import { Container,
   TypeDescription,
   TypeImage,
   CancelButton,
-  RequestButtonText
+  RequestButtonText,
+  ModalDetails,
+  DetailsButton,
+  WhatsButton,
+  CloseButton
 } from './styles';
 import {VoiceContext} from "../../context/Voice"
 
 
 export default function InfoTravel() {
   const refRBSheet = useRef() as React.MutableRefObject<RBSheet>;
+
+  const [isvisible, setisvisible] = useState(false);
+  
 
   useEffect(() => {
     refRBSheet.current?.open();
@@ -65,6 +72,7 @@ export default function InfoTravel() {
 
 
   return (
+    <>
         <CodContainer>
           <TypeCode style={{fontSize: 28, color: "white"}}>{useTravel.travel_cod}</TypeCode>
           <Container>            
@@ -73,9 +81,31 @@ export default function InfoTravel() {
             <TypeDescription style={{fontSize: 24, color: "white"}}>Carro: {useTravel.carro?.Carro}  {useTravel.carro?.Cor}</TypeDescription>
             <TypeDescription style={{fontSize: 24, color: "white"}}>Placa: {useTravel.carro?.placa}</TypeDescription>
             <TypeDescription style={{fontSize: 24, color: "white"}}>Valor: R${useTravel.price.toFixed(2)}</TypeDescription>
-            <TypeDescription>Tempo de chegada: {useTravel.time_chegada} minutos</TypeDescription>
+            <TypeDescription>Tempo de chegada do motorista: {useTravel.time_chegada} min</TypeDescription>
+            <View style={{flex:1, flexDirection:"row", alignItems: 'center'}}>
             <CancelButton onPress = {createTwoButtonAlert}><RequestButtonText>Cancelar</RequestButtonText></CancelButton>
+            <DetailsButton onPress = {() => {setisvisible(true)}}><RequestButtonText>Detalhes</RequestButtonText></DetailsButton></View>
           </Container>
         </CodContainer>
+        <ModalDetails 
+          animationType={'slide'} 
+          transparent={false}
+          visible={isvisible}
+          onRequestClose={() => {}}
+          >
+            <View style={{flex:1, backgroundColor: "#1C1C1C", flexDirection: "column", alignItems: 'center', alignContent: "center", paddingTop: 150}}>
+              <TypeDescription style={{fontSize: 24, color: "#19cdce", alignSelf: "center"}}>Informe o código abaixo</TypeDescription>
+              <TypeCode style={{fontSize: 28, color: "white", paddingBottom: 30, paddingTop: 15}}>{useTravel.travel_cod}</TypeCode>
+              <TypeDescription style={{fontSize: 24, color: "#19cdce", alignSelf: "center"}}>Para {useTravel.destination?.title}</TypeDescription>
+              <TypeDescription style={{fontSize: 24, color: "white"}}>Nome do motorista: {useTravel.driver}</TypeDescription>
+              <TypeDescription style={{fontSize: 24, color: "white"}}>Carro: {useTravel.carro?.Carro}  {useTravel.carro?.Cor}</TypeDescription>
+              <TypeDescription style={{fontSize: 24, color: "white"}}>Placa: {useTravel.carro?.placa}</TypeDescription>
+              <TypeDescription style={{fontSize: 24, color: "white"}}>Valor: R${useTravel.price.toFixed(2)}</TypeDescription>
+              <TypeDescription>Tempo até seu destino: {useTravel.time} min</TypeDescription>
+              <WhatsButton><RequestButtonText>Compartilhar corrida</RequestButtonText></WhatsButton>
+              <CloseButton onPress={()=>{setisvisible(false)}}><RequestButtonText>Voltar ao mapa</RequestButtonText></CloseButton>
+            </View>
+        </ModalDetails>
+        </>
   );
 }

@@ -58,7 +58,49 @@ export const CancelButton = styled.TouchableOpacity`
     justify-content: center;
     align-items: center;
     height: 50px;
+    width: 150px;
+    align-self: center;
+    margin-top: 10px; 
+    margin-right: 10px;
+`;
+
+export const ModalDetails = styled.Modal`
+    height: 100px;
+    width: 100%;
+    opacity: 1;
+    bottom: 0;
+    padding: 20px;
+`;
+
+export const DetailsButton = styled.TouchableOpacity`
+    border: 1px solid #19cdce;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    width: 150px;
+    align-self: center;
+    margin-top: 10px; 
+    margin-right: 10px;
+`;
+
+
+export const WhatsButton = styled.TouchableOpacity`
+    border: 1px solid #00FF00;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
     width: 300px;
+    align-self: center;
+    margin-top: 10px; 
+    margin-right: 10px;
+`;
+
+export const CloseButton = styled.TouchableOpacity`
+    border: 1px solid #19cdce;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    width: 150px;
     align-self: center;
     margin-top: 10px; 
     margin-right: 10px;

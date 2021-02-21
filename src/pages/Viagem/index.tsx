@@ -11,6 +11,10 @@ import { useNavigation } from '@react-navigation/native';
 import 'react-native-gesture-handler';
 
 
+const viagens = [{destino: 'Shopping Tamboré', valor: 'R$45,10',  date: '12/20'},
+{destino: 'Padaria Central ', valor: 'R$20,00',  date: '05/20'},
+{destino: 'Parque Villa Lobos ', valor: 'R$57,50',  date: '02/20'},
+{destino: 'Fatec Carapicuiba', valor: "R$48.80", date: "03/20"} ]
 //import * as firebase from 'firebase-tools';
 //import 'firebase/firestore'
 //import {firebaseConfig} from '../../back/confgFireBase'
@@ -25,10 +29,23 @@ const Viagem = () => {
         <KeyboardAvoidingView style={styles.container}>
             <Text style={{fontSize:28, color:'#19cdce', textAlign:'center'}}>MINHAS VIAGENS</Text>
             <Text style={{fontSize:16, color:'#fff', paddingTop:5, textAlign:'center'}}>Histórico de viagens</Text>
-            <View style={styles.viagens}>  
-                <Text style={styles.endereco}>Shopping Tamboré       12/20        R$ 45,10    </Text>
-                <Text style={styles.endereco}>Padaria Central             05/20        R$ 20,00    </Text> 
-                <Text style={styles.endereco}>Parque Villa Lobos       02/20        R$ 57,50   </Text>                       
+            
+            <View style={styles.viagens}>
+            {viagens[0] ? viagens.map((result:any, index:any) => {
+                return (
+                    <View style={styles.list}> 
+                        <Text key={`partial-result-${index}`} style={styles.endereco}>
+                            {result.destino}    
+                        </Text>
+                        <Text key={`partial-result-${index}`} style={styles.endereco}>
+                            {result.date}
+                        </Text>
+                        <Text key={`partial-result-${index}`} style={styles.endereco}>
+                            {result.valor}
+                        </Text>
+                    </View>
+                );
+            }) : <Text style={styles.endereco}>Nenhuma viagem para exibir</Text> }                        
             </View>                            
             <View style={styles.footer}>
                 <TouchableOpacity style={styles.button} onPress={() => navigate("Menu")}>
