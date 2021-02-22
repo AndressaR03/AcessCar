@@ -61,7 +61,8 @@ function Details( {distance, duration}:any){
     function handlerequest(){
         useVoice.setisVisibleDetails(false);
         useVoice.setisVisibleDriver(true);
-        useTravel.setCancel(false)
+        useTravel.setCancel(false);
+        console.log(useTravel.origem)
         get_Travel_cod();
         //Carlos, subir informações da corrida
         //price, destination, origem, travel_cod, confirmation, time, paymethod

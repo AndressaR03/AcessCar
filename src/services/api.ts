@@ -2,6 +2,7 @@ import { dbFirebase, db, dbAuth } from '../back/firebase'
 import 'firebase/auth'
 import 'firebase/firestore'
 import 'firebase/storage'
+import AsyncStorage from '@react-native-community/async-storage';
 
 const api = {
     loginWithEmailAndPassword: async (email: string, senha: string) => {
@@ -68,6 +69,17 @@ const api = {
                 console.error("Error writing document: ", error);
             });
         return hasSaved
+    },
+    
+    getViagens: (setDados:any) => {
+        return db.collection("users").where("tipoUsuario", "==", "Artista")
+        .onSnapshot(function(querySnapshot) {
+            let arrays: any = []
+            querySnapshot.forEach(function(doc) {
+                arrays.push(doc.data());
+            });
+            setDados(arrays)
+        });
     },
 }
 

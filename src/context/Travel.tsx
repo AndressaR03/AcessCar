@@ -1,7 +1,7 @@
 
 import React, {  createContext, useState, useContext} from "react";
 import useAsyncStore from '@react-native-community/async-storage';
-
+import Api from '../services/api'
 
 interface Idestination{
     latitude: any,
@@ -33,7 +33,7 @@ interface ITravelContext{
     setCarro:any,
     driver:any,
     setDriver:any,
-    origem:any, 
+    origem:Idestination | null, 
     setOrigem:any,
     travel_cod:any,
     setTravel_cod:any,
@@ -49,6 +49,8 @@ interface ITravelContext{
     setpaymethod: any
     cancel: boolean;
     setCancel: any;
+    dados: any;
+    PegarViagens(): Promise<void>;
      
 };
 
@@ -60,14 +62,25 @@ export function TravelProvider({ children }:any) {
     const [passageiroID, setPassageiroID] = useState<any>(null);
     const [carro, setCarro] = useState<any>(null);
     const [driver, setDriver] = useState<any>(null);
-    const [origem, setOrigem] = useState<any>(null);
+    const [origem, setOrigem] = useState<Idestination | null>(null);
     const [travel_cod, setTravel_cod] = useState<any>(null);
     const [confirmation, setConfirmation] = useState(false);
     const [time, setTime] = useState<number>(0);
     const [driverlocation, setdriverlocation] = useState<any>(null);
     const [time_chegada,  setTimeChegada] = useState(0);
     const [paymethod, setpaymethod] = useState('Dinheiro');
+    const [motoristaID, setMotoristaID ] = useState<any>(null);
     const [cancel, setCancel] = useState(false);
+    const [dados, setDados] = useState<any>(null);
+
+    async function PegarViagens() {
+        try {
+          let viagem_ =  await Api.getViagens(setDados);
+        } catch (error) {
+            alert('errro ao carregar as viagens')
+        }
+    }
+    
 
     return (
         <TravelContext.Provider value={{price, setPrice,
@@ -76,7 +89,7 @@ export function TravelProvider({ children }:any) {
             carro, setCarro,driver, setDriver,
             origem, setOrigem, travel_cod, setTravel_cod, confirmation, setConfirmation,
             time, setTime, driverlocation, setdriverlocation, time_chegada,  setTimeChegada, paymethod, setpaymethod
-            ,cancel, setCancel}}>
+            ,cancel, setCancel, dados, PegarViagens}}>
             {children}
         </TravelContext.Provider>
     );

@@ -29,7 +29,7 @@ function Travel( {distance, duration}:any){
         <View style = {{flex:1 , flexDirection: 'column', alignItems:"center"}}>
             <View style ={{flex: 3}}>
                <TypeCarDescription>Destino: {useTravel.destination?.title}</TypeCarDescription>
-                <TypeCarDescription>Partida: {useTravel.origem}</TypeCarDescription>
+                <TypeCarDescription>Partida: {useTravel.origem?.title}</TypeCarDescription>
                 <TypeCarDescription>Tempo estimado: {useTravel.time} minutos</TypeCarDescription>
                 <TypeCarDescription>Preço: R${useTravel.price.toFixed(2)}</TypeCarDescription>
                 <TypeTitle>Procurando Motorista...</TypeTitle>

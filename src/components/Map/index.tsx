@@ -89,6 +89,7 @@ export default function Map (props:Props){
         const adress = result[0].street;
     
         setlocation(adress)
+        useTravel.setOrigem({latitude: coords.latitude, longitude: coords.longitude, title: adress});
       })
     
        // Center the map on the location we just fetched.
@@ -99,7 +100,7 @@ export default function Map (props:Props){
         const { location: {lat: latitude, lng: longitude} } = geometry;
         setdestination({latitude: latitude, longitude: longitude, title: data.structured_formatting.main_text,})
         useTravel.setDestination({latitude: latitude, longitude: longitude, title: data.structured_formatting.main_text,})
-        useVoice.setisVisibleDetails(true)
+        useVoice.setisVisibleDetails(true);
       }
     
       function handleBack( ){
@@ -276,9 +277,10 @@ export default function Map (props:Props){
       };
 
       function SaveDataTravel(){
-        useTravel.setOrigem(location);
         useTravel.setDestination(destination);
         useTravel.setTime(duration);
+        console.log(useTravel.destination);
+        
       };
 
         const mapViewRef = React.useRef()  as React.MutableRefObject<MapView>;

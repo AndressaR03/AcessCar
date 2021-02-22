@@ -4,7 +4,7 @@ import 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-community/async-storage';
 import { RNFirebase } from 'react-native-firebase';
 import firebase from 'react-native-firebase';
-import Api from '../services/api'
+import Api from '../services/api';
 
 
 interface AuthContextData {

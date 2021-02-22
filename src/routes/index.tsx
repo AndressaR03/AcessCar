@@ -10,13 +10,13 @@ import AuthRoutes from "./AuthRoutes";
 function Routes () {
     const {signed, loading} = useContext(AuthContext);
 
-    if(loading){
+    /*if(loading){
         return (
             <View style={{flex: 1, justifyContent: 'center', alignItems:'center', backgroundColor: "#1C1C1C"}}>
                 <ActivityIndicator size="large" color="#19cdce"/>
             </View>
         );
-    }
+    }*/
     return signed ? <AppPageRoutes/> : <AuthRoutes />;
 };
 

@@ -54,7 +54,7 @@ function Menu() {
         <>
             <View style={styles.container}>
                 <Text style={styles.menu}>Menu</Text>
-                <Button title="User" onPress={() => {console.log(user?.nome)}} />
+                <Text style={styles.welcome}>Bem vindo(a) {user?.nome}</Text>
                 <Carousel
                     sliderHeight={400}
                     sliderWidth={400}
@@ -91,6 +91,10 @@ const styles = StyleSheet.create({
         color: "#000",
         alignSelf: 'center',
         paddingTop: 320
+    },
+    welcome: {
+        fontSize: 20,
+        color: "#fff",
     },
     box: {
         width: 300,
