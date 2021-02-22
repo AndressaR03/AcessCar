@@ -14,7 +14,7 @@ import 'react-native-gesture-handler';
 const viagens = [{destino: 'Shopping Tamboré', valor: 'R$45,10',  date: '12/20'},
 {destino: 'Padaria Central ', valor: 'R$20,00',  date: '05/20'},
 {destino: 'Parque Villa Lobos ', valor: 'R$57,50',  date: '02/20'},
-{destino: 'Fatec Carapicuiba', valor: "R$48.80", date: "03/20"} ]
+{destino: 'Fatec Carapicuiba', valor: "R$48.80", date: "03/20"}]
 //import * as firebase from 'firebase-tools';
 //import 'firebase/firestore'
 //import {firebaseConfig} from '../../back/confgFireBase'

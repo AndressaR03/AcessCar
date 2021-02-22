@@ -1,5 +1,7 @@
 
 import React, {  createContext, useState, useContext} from "react";
+import useAsyncStore from '@react-native-community/async-storage';
+
 
 interface Idestination{
     latitude: any,
@@ -66,6 +68,7 @@ export function TravelProvider({ children }:any) {
     const [time_chegada,  setTimeChegada] = useState(0);
     const [paymethod, setpaymethod] = useState('Dinheiro');
     const [cancel, setCancel] = useState(false);
+
     return (
         <TravelContext.Provider value={{price, setPrice,
             destination, setDestination,
