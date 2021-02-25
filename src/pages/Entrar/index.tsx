@@ -62,7 +62,7 @@ function Entrar () {
         </TouchableOpacity> 
         <View style={styles.footer}>
           <TouchableOpacity style={styles.button} onPress = {handleSignIn}>
-            <Text style={{ fontSize: 20, color: '#1c1c1c', alignItems: "center",fontWeight:'bold', }}>Entrar</Text>
+            <Text style={{ fontSize: 20, color: '#1c1c1c', alignItems: "center"}}>Entrar</Text>
           </TouchableOpacity>
         </View>       
       </View>

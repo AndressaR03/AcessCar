@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#1C1C1C',
         flex: 1,
         alignItems: "center",
-        paddingTop: 70,
+        paddingTop: 30,
     },
     cadastro: {
         textAlign: 'center',
@@ -33,32 +33,20 @@ const styles = StyleSheet.create({
         marginTop:50,
         flex:1,
         padding:20,
-        borderTopLeftRadius:20,
-        borderTopRightRadius:20
+
     },
     endereco:{
         height: 50, 
-        width: 105,
+        width: 320,
         paddingLeft: 10,
         backgroundColor: '#fff',
-        borderRadius:10,
+        borderRadius:2,
         color:'#1c1c1c',
         fontSize:16,
         marginBottom:20,
         justifyContent:'center',
         textAlignVertical:'center',
         fontWeight:'bold',
-    },
-    list:{
-        height: 50, 
-        width: 320,
-        paddingLeft: 10,
-        backgroundColor: '#fff',
-        borderRadius:10,
-        marginBottom:20,
-        justifyContent:'center',
-        textAlignVertical:'center',
-        flexDirection: "row",
     },
     footer:{
         position:'absolute',
@@ -67,7 +55,10 @@ const styles = StyleSheet.create({
         paddingBottom:20,
         justifyContent:'center',
         alignItems:'center',
-        width:'100%',
+        width:'100%'
+      },
+      list:{
+        marginBottom:40,
       },
     button: {
         width: 320,
@@ -76,15 +67,34 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         padding: 10,
         borderRadius: 2,
+      }, 
+      button1: {
+        width: 150,
+        height: 45,
+        backgroundColor: '#19cdce',
+        alignItems: 'center',
+        padding: 10,
+        borderRadius: 2,
       },
+      button2: {
+        width: 320,
+        height: 45,
+        backgroundColor: '#19cdce',
+        alignItems: 'center',
+        padding: 10,
+        borderRadius: 2,
+        marginBottom:30
+
+      },  
       fechar: {
         width: 40,
         height: 40,
         backgroundColor: '#19cdce',
         alignItems: 'center',
         justifyContent:'center',
-        borderRadius: 100,        
-      },
+        borderRadius: 100,
+        
+      },  
 
 });
 export default styles;

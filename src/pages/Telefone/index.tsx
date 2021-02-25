@@ -39,10 +39,10 @@ function Telefone() {
       </View>
       <View style={styles.footer}>
         <TouchableOpacity style={styles.button1} onPress={() => navigate("Cadastro")}>
-          <Text style={{ fontSize: 20, color: '#1c1c1c', alignItems: "center", fontWeight: 'bold', }}>Voltar</Text>
+          <Text style={{ fontSize: 20, color: '#1c1c1c', alignItems: "center" }}>Voltar</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button2} onPress={SaveDataNext}>
-          <Text style={{ fontSize: 20, color: '#1c1c1c', alignItems: "center", fontWeight: 'bold' }}>Avançar</Text>
+          <Text style={{ fontSize: 20, color: '#1c1c1c', alignItems: "center"}}>Avançar</Text>
         </TouchableOpacity>
       </View>
     </KeyboardAvoidingView>

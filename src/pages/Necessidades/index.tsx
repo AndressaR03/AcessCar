@@ -73,7 +73,7 @@ function Necessidades() {
                 <View style={{ flexDirection: 'row', alignSelf: 'flex-start', width: 320, backgroundColor: '#333333', borderRadius: 5, marginTop: 20 }}>
                     <Text style={styles.intro}>Utiliza cão guia:</Text>
                     <SwitchSelector style={{ width: 120, marginTop: 10, marginLeft: 70, paddingBottom: 10 }}
-                        options={options2}
+                        options={options}
                         initial={0}
                         onPress={value => setCaoGuia(value)}
                         buttonColor={'#19cdce'}
@@ -87,7 +87,7 @@ function Necessidades() {
                 <View style={{ flexDirection: 'row', alignSelf: 'flex-start', width: 320, backgroundColor: '#333333', borderRadius: 5, marginTop: 20 }}>
                     <Text style={styles.intro}>Possui acompanhante:</Text>
                     <SwitchSelector style={{ width: 120, marginTop: 10, marginLeft: 19, paddingBottom: 10 }}
-                        options={options3}
+                        options={options}
                         initial={0}
                         onPress={value => setAcompanhante(value)}
                         buttonColor={'#19cdce'}
@@ -101,7 +101,7 @@ function Necessidades() {
                 <View style={{ flexDirection: 'row', alignSelf: 'flex-start', width: 320, backgroundColor: '#333333', borderRadius: 5, marginTop: 20 }}>
                     <Text style={styles.intro}>Faz uso de bengala:</Text>
                     <SwitchSelector style={{ width: 120, marginTop: 10, marginLeft: 40, paddingBottom: 10 }}
-                        options={options4}
+                        options={options}
                         initial={0}
                         onPress={value => setBengala(value)}
                         buttonColor={'#19cdce'}
@@ -115,10 +115,10 @@ function Necessidades() {
             </View>
             <View style={styles.footer}>
                 <TouchableOpacity style={styles.button1} onPress={() => navigate("Senha")}>
-                    <Text style={{ fontSize: 20, color: '#1c1c1c', alignItems: "center", fontWeight: 'bold', }}>Voltar</Text>
+                    <Text style={{ fontSize: 20, color: '#1c1c1c', alignItems: "center"}}>Voltar</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.button2} onPress={SaveDataNext}>
-                    <Text style={{ fontSize: 20, color: '#1c1c1c', alignItems: "center", fontWeight: 'bold', }}>Concluir</Text>
+                    <Text style={{ fontSize: 20, color: '#1c1c1c', alignItems: "center" }}>Concluir</Text>
                 </TouchableOpacity>
             </View>
         </KeyboardAvoidingView>

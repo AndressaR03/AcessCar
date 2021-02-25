@@ -6,6 +6,7 @@ import {
     Text,
     TextInput,
     KeyboardAvoidingView,
+    ScrollView
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import 'react-native-gesture-handler';
@@ -29,7 +30,7 @@ const Viagem = () => {
         <KeyboardAvoidingView style={styles.container}>
             <Text style={{fontSize:28, color:'#19cdce', textAlign:'center'}}>MINHAS VIAGENS</Text>
             <Text style={{fontSize:16, color:'#fff', paddingTop:5, textAlign:'center'}}>Histórico de viagens</Text>
-            
+            <ScrollView>
             <View style={styles.viagens}>
             {viagens[0] ? viagens.map((result:any, index:any) => {
                 return (
@@ -43,13 +44,15 @@ const Viagem = () => {
                         <Text key={`partial-result-${index}`} style={styles.endereco}>
                             {result.valor}
                         </Text>
+                        <View style={{borderBottomWidth:1, borderBottomColor:'#19cdce', paddingBottom:15}}/>
                     </View>
                 );
             }) : <Text style={styles.endereco}>Nenhuma viagem para exibir</Text> }                        
-            </View>                            
+            </View>              
+            </ScrollView>
             <View style={styles.footer}>
-                <TouchableOpacity style={styles.button} onPress={() => navigate("Menu")}>
-                    <Text style={{ fontSize: 20, color: '#1c1c1c', alignItems: "center", fontWeight:"bold"}}>Fechar</Text>
+                <TouchableOpacity style={styles.button} onPress={() => navigate("Perfil")}>
+                    <Text style={{ fontSize: 20, color: '#1c1c1c', alignItems: "center"}}>Fechar</Text>
                 </TouchableOpacity>            
             </View>
         </KeyboardAvoidingView>

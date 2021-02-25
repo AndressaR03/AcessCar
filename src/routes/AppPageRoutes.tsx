@@ -4,9 +4,11 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 
 import Localizacao from '../pages/Mapa';
-import Menu from '../pages/Menu';
 import Viagem from '../pages/Viagem';
-import Cartao from '../pages/Cartao';
+import Perfil from '../pages/Perfil';
+import CadastroCartao from '../pages/CadastroCartao';
+import Pagamento from '../pages/Pagamento';
+import NovaSenha from '../pages/NovaSenha';
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -14,21 +16,30 @@ function AppPageRoutes() {
   return (
     <Navigator screenOptions={{ headerShown: false }}>
       <Screen
-        name="Menu"
-        component={Menu}
-      />
-      <Screen
-        name="Viagem"
-        component={Viagem}
+        name="Perfil"
+        component={Perfil}
       />
       <Screen
         name="Localizacao"
         component={Localizacao}
       />
       <Screen
-        name="Cartao"
-        component={Cartao}
+        name="NovaSenha"
+        component={NovaSenha}
       />
+      <Screen
+        name="CadastroCartao"
+        component={CadastroCartao}
+      />
+      <Screen
+        name="Pagamento"
+        component={Pagamento}
+      />
+      <Screen
+        name="Viagem"
+        component={Viagem}
+      />
+            
     </Navigator>
   );
 }

@@ -34,11 +34,11 @@ const Pagamento = () => {
             <TextInput placeholderTextColor="white" keyboardType={'default'} style={styles.nome} placeholder='Nome escrito no cartão' />              
             </View>                            
             <View style={styles.footer}>
-                <TouchableOpacity style={styles.button1} onPress={() => navigate("Necessidades")}>
-                    <Text style={{ fontSize: 20, color: '#1c1c1c', alignItems: "center", fontWeight:'bold', }}>Voltar</Text>
+                <TouchableOpacity style={styles.button1} onPress={() => navigate("Perfil")}>
+                    <Text style={{ fontSize: 20, color: '#1c1c1c', alignItems: "center"}}>Voltar</Text>
                 </TouchableOpacity>  
-                <TouchableOpacity style={styles.button2} onPress={() => navigate("Menu")}>
-                    <Text style={{ fontSize: 20, color: '#1c1c1c', alignItems: "center",fontWeight:'bold', }}>Cadastrar</Text>
+                <TouchableOpacity style={styles.button2} onPress={() => navigate("Perfil")}>
+                    <Text style={{ fontSize: 20, color: '#1c1c1c', alignItems: "center" }}>Cadastrar</Text>
                 </TouchableOpacity>            
             </View>
         </KeyboardAvoidingView>

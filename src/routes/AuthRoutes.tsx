@@ -5,7 +5,6 @@ import Login from "../pages/Home/home";
 import Necessidades from '../pages/Necessidades';
 import Entrar from '../pages/Entrar';
 import Localizacao from '../pages/Mapa';
-import Menu from '../pages/Menu';
 import Cadastro from '../pages/Cadastro';
 import Pagamento from '../pages/Pagamento';
 import Senha from '../pages/Senha';

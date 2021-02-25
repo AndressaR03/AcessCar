@@ -22,7 +22,6 @@ const styles = StyleSheet.create({
   texto:{
     fontSize:22,
     color:'#1C1C1C',
-    fontWeight:'bold',
   }, 
   });
   export default styles;
